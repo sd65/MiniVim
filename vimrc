@@ -37,6 +37,7 @@ set showbreak=↪ " See this char when wrapping text
 set encoding=utf-8  " The encoding displayed.
 set fileencoding=utf-8  " The encoding written to file.
 set synmaxcol=300 " Don't try to highlight long lines
+set guioptions-=T " Don't show toolbar in Gvim
 " Open all cmd args in new tabs
 execute ":silent :tab all" 
 
