@@ -45,6 +45,8 @@ And then add `stty -ixon` to your .zshrc or .bashrc (your shell will ignore XON/
 
 ### General Mappings
 
+** You hate those mappings? No problem, change the 4th line of this .vimrc to `UseCustomKeyBindings=0`.** 
+
 Keys | Action | Comments         
 | :---: | :---: | :---: |
 | **Moving** | **----------** | **----------**
@@ -79,6 +81,7 @@ Keys | Action | Comments
 `F2` | Set paste toggle | With paste on you can paste more easily
 `F3` | Show line numbers toggle | Show or hide line numbers
 `F4` | Panic Button! Toggle garbage screen | Remember as "I need to alt-**F4**!"
+`F6` | Toggle color column at 80th char | A visual helper to write clean code
 
 ### Mappings in Explorer
 
