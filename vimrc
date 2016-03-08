@@ -1,6 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Details on : https://github.com/sd65/MiniVim
 let MiniVimVersion = 1.0
+let UseCustomKeyBindings = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """ General options
@@ -41,66 +42,6 @@ set guioptions-=T " Don't show toolbar in Gvim
 " Open all cmd args in new tabs
 execute ":silent :tab all" 
 
-""" Colors and Statusline
-let defaultAccentColor=161
-let colorsAndModes= {
-  \ 'i' : 39,
-  \ 'v' : 82,
-\}
-let defaultAccentColorGui='#d7005f'
-let colorsAndModesGui= {
-  \ 'i' : '#00afff',
-  \ 'v' : '#5fff00',
-\}
-function! ChangeAccentColor()
-  let accentColor=get(g:colorsAndModes, mode(), g:defaultAccentColor)
-  let accentColorGui=get(g:colorsAndModesGui, mode(), g:defaultAccentColorGui)
-  execute 'hi User1 ctermfg=0 guifg=#000000 ctermbg=' . accentColor . ' guibg=' . accentColorGui
-  execute 'hi User2 ctermbg=0 guibg=#2e3436 ctermfg=' . accentColor . ' guifg=' . accentColorGui
-  execute 'hi User3 ctermfg=0 guifg=#000000 cterm=bold gui=bold ctermbg=' . accentColor . ' guibg=' . accentColorGui
-  execute 'hi TabLineSel ctermfg=0 cterm=bold ctermbg=' . accentColor
-  execute 'hi TabLine ctermbg=0 ctermfg=' . accentColor
-  execute 'hi CursorLineNr ctermfg=' . accentColor . ' guifg=' . accentColorGui
-  return ''
-endfunction
-function! ReadOnly()
-  return (&readonly || !&modifiable) ? 'Read Only ' : ''
-endfunction
-function! Modified()
-  return (&modified) ? 'Modified' : 'Not modified'
-endfunction
-let g:currentmode={
-    \ 'n'  : 'Normal',
-    \ 'no' : 'N·Operator Pending',
-    \ 'v'  : 'Visual',
-    \ 'V'  : 'V·Line',
-    \ '^V' : 'V·Block',
-    \ 's'  : 'Select',
-    \ 'S'  : 'S·Line',
-    \ '^S' : 'S·Block',
-    \ 'i'  : 'Insert',
-    \ 'R'  : 'Replace',
-    \ 'Rv' : 'VReplace',
-    \ 'c'  : 'Command',
-    \ 'cv' : 'Vim Ex',
-    \ 'ce' : 'Ex',
-    \ 'r'  : 'Prompt',
-    \ 'rm' : 'More',
-    \ 'r?' : 'Confirm',
-    \ '!'  : 'Shell',
-    \ 't'  : 'Terminal',
-\}
-set statusline=
-set statusline+=%{ChangeAccentColor()}
-set statusline+=%1*\ ***%{toupper(g:currentmode[mode()])}***\  " Current mode
-set statusline+=%2*\ %<%F\  " Filepath
-set statusline+=%2*\ %= " To the right
-set statusline+=%2*\ %{toupper((&fenc!=''?&fenc:&enc))}\[%{&ff}] " Encoding & Fileformat
-set statusline+=%2*\ %{Modified()}\ %{ReadOnly()} " Flags
-set statusline+=%1*\ \%l/%L-%c\  " Position
-" Speed up the redraw
-au InsertLeave * call ChangeAccentColor()
-au CursorHold * let &ro = &ro
 
 """ Prevent lag when hitting escape
 set ttimeoutlen=0
@@ -130,7 +71,12 @@ let &directory = mySwapDir
 let &backupdir = myBackupDir
 set writebackup
 
-""" Helper functions
+
+""" Key mappings
+
+if UseCustomKeyBindings
+
+" Helper functions
 function! CreateShortcut(keys, cmd, where, ...)
   let keys = "<" . a:keys . ">"
   if a:where =~ "i"
@@ -179,8 +125,29 @@ function! OpenLastBufferInNewTab()
       endif       
     endfor  
 endfunction
-
-""" Key mappings
+function! ToggleColorColumn()
+    if &colorcolumn != 0
+        windo let &colorcolumn = 0
+    else
+        windo let &colorcolumn = 80
+    endif
+endfunction
+function! MyPasteToggle()
+  set invpaste
+  echo "Paste" (&paste) ? "On" : "Off"
+endfunction
+function! MenuNetrw()
+  let c = input("What to you want to do? (M)ake a dir, Make a (F)ile, (R)ename, (D)elete : ")
+  if (c == "m" || c == "M")
+    normal d
+  elseif (c == "f" || c == "F")
+    normal %
+  elseif (c == "r" || c == "R")
+    normal R
+  elseif (c == "d" || c == "D")
+    normal D
+  endif
+endfunction
 
 " Usefull shortcuts to inter insert mode
 nnoremap <Enter> i<Enter>
@@ -273,10 +240,6 @@ call CreateShortcut("A-Right", "gt", "inv")
 call CreateShortcut("A-Left", "gT", "inv")
 
 " F2 - Paste toggle
-function! MyPasteToggle()
-  set invpaste
-  echo "Paste" (&paste) ? "On" : "Off"
-endfunction
 call CreateShortcut("f2",":call MyPasteToggle()<Enter>", "n")
 
 " F3 - Line numbers toggle
@@ -284,6 +247,9 @@ call CreateShortcut("f3",":set nonumber!<Enter>", "in")
 
 " F4 - Panic Button
 call CreateShortcut("f4","mzggg?G`z", "inv")
+
+" F6 - Toggle color column at 80th char
+call CreateShortcut("f6",":call ToggleColorColumn()<Enter>", "inv")
 
 " Ctrl O - Netrw (:Explore)
 call CreateShortcut("C-o",":Texplore<Enter>", "inv", "noTrailingIInInsert")
@@ -297,22 +263,11 @@ function! KeysInNetrw()
   nmap <buffer> <Left> -
   " l - Display info
   nmap <buffer> l qf
-  " N - Menu
+  " n - Menu
   nmap <buffer> n :call MenuNetrw()<Enter>
 endfunction
-function! MenuNetrw()
-  let c = input("What to you want to do? (M)ake a dir, Make a (F)ile, (R)ename, (D)elete : ")
-  if (c == "m" || c == "M")
-    normal d
-  elseif (c == "f" || c == "F")
-    normal %
-  elseif (c == "r" || c == "R")
-    normal R
-  elseif (c == "d" || c == "D")
-    normal D
-  endif
-endfunction
 
+endif " End custom key bindings
 
 """ Custom commands
 
@@ -321,6 +276,68 @@ command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 " :UndoCloseTab - To undo close tab
 command UndoCloseTab call OpenLastBufferInNewTab()
+
+""" Colors and Statusline
+
+let defaultAccentColor=161
+let colorsAndModes= {
+  \ 'i' : 39,
+  \ 'v' : 82,
+\}
+let defaultAccentColorGui='#d7005f'
+let colorsAndModesGui= {
+  \ 'i' : '#00afff',
+  \ 'v' : '#5fff00',
+\}
+function! ChangeAccentColor()
+  let accentColor=get(g:colorsAndModes, mode(), g:defaultAccentColor)
+  let accentColorGui=get(g:colorsAndModesGui, mode(), g:defaultAccentColorGui)
+  execute 'hi User1 ctermfg=0 guifg=#000000 ctermbg=' . accentColor . ' guibg=' . accentColorGui
+  execute 'hi User2 ctermbg=0 guibg=#2e3436 ctermfg=' . accentColor . ' guifg=' . accentColorGui
+  execute 'hi User3 ctermfg=0 guifg=#000000 cterm=bold gui=bold ctermbg=' . accentColor . ' guibg=' . accentColorGui
+  execute 'hi TabLineSel ctermfg=0 cterm=bold ctermbg=' . accentColor
+  execute 'hi TabLine ctermbg=0 ctermfg=' . accentColor
+  execute 'hi CursorLineNr ctermfg=' . accentColor . ' guifg=' . accentColorGui
+  return ''
+endfunction
+function! ReadOnly()
+  return (&readonly || !&modifiable) ? 'Read Only ' : ''
+endfunction
+function! Modified()
+  return (&modified) ? 'Modified' : 'Not modified'
+endfunction
+let g:currentmode={
+    \ 'n'  : 'Normal',
+    \ 'no' : 'N·Operator Pending',
+    \ 'v'  : 'Visual',
+    \ 'V'  : 'V·Line',
+    \ '^V' : 'V·Block',
+    \ 's'  : 'Select',
+    \ 'S'  : 'S·Line',
+    \ '^S' : 'S·Block',
+    \ 'i'  : 'Insert',
+    \ 'R'  : 'Replace',
+    \ 'Rv' : 'VReplace',
+    \ 'c'  : 'Command',
+    \ 'cv' : 'Vim Ex',
+    \ 'ce' : 'Ex',
+    \ 'r'  : 'Prompt',
+    \ 'rm' : 'More',
+    \ 'r?' : 'Confirm',
+    \ '!'  : 'Shell',
+    \ 't'  : 'Terminal',
+\}
+set statusline=
+set statusline+=%{ChangeAccentColor()}
+set statusline+=%1*\ ***%{toupper(g:currentmode[mode()])}***\  " Current mode
+set statusline+=%2*\ %<%F\  " Filepath
+set statusline+=%2*\ %= " To the right
+set statusline+=%2*\ %{toupper((&fenc!=''?&fenc:&enc))}\[%{&ff}] " Encoding & Fileformat
+set statusline+=%2*\ %{Modified()}\ %{ReadOnly()} " Flags
+set statusline+=%1*\ \%l/%L-%c\  " Position
+" Speed up the redraw
+au InsertLeave * call ChangeAccentColor()
+au CursorHold * let &ro = &ro
 
 """" Color Scheme
 
