@@ -45,7 +45,7 @@ And then add `stty -ixon` to your .zshrc or .bashrc (your shell will ignore XON/
 
 ### General Mappings
 
-** You hate those mappings? No problem, change the 4th line of this .vimrc to `UseCustomKeyBindings=0`.** 
+**You hate those mappings? No problem, change the 4th line of this .vimrc to `UseCustomKeyBindings=0`.** 
 
 Keys | Action | Comments         
 | :---: | :---: | :---: |
