@@ -34,7 +34,7 @@ set number " Show the line number
 set updatetime=1000
 set ignorecase " Search insensitive
 set smartcase " ... but smart
-set showbreak=↪ " See this char when wrapping text
+let &showbreak="\u21aa " " Show a left arrow when wrapping text
 set encoding=utf-8  " The encoding displayed.
 set fileencoding=utf-8  " The encoding written to file.
 set synmaxcol=300 " Don't try to highlight long lines
