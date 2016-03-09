@@ -149,7 +149,7 @@ function! MenuNetrw()
   endif
 endfunction
 
-" Usefull shortcuts to inter insert mode
+" Usefull shortcuts to enter insert mode
 nnoremap <Enter> i<Enter>
 nnoremap <Backspace> i<Backspace>
 nnoremap <Space> i<Space>
