@@ -136,6 +136,14 @@ function! MyPasteToggle()
   set invpaste
   echo "Paste" (&paste) ? "On" : "Off"
 endfunction
+function! OpenNetrw()
+  if TabIsEmpty() == 1
+    Explore
+  else
+    Texplore
+  endif
+endfunction
+
 function! MenuNetrw()
   let c = input("What to you want to do? (M)ake a dir, Make a (F)ile, (R)ename, (D)elete : ")
   if (c == "m" || c == "M")
@@ -252,7 +260,7 @@ call CreateShortcut("f4","mzggg?G`z", "inv")
 call CreateShortcut("f6",":call ToggleColorColumn()<Enter>", "inv")
 
 " Ctrl O - Netrw (:Explore)
-call CreateShortcut("C-o",":Texplore<Enter>", "inv", "noTrailingIInInsert")
+call CreateShortcut("C-o",":call OpenNetrw()<Enter>", "inv", "noTrailingIInInsert", "cmdInVisual")
 let g:netrw_banner=0 " Hide banner
 let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+' " Hide hidden files
 autocmd filetype netrw call KeysInNetrw()
