@@ -291,11 +291,13 @@ let defaultAccentColor=161
 let colorsAndModes= {
   \ 'i' : 39,
   \ 'v' : 82,
+  \ 'V' : 226,
 \}
 let defaultAccentColorGui='#d7005f'
 let colorsAndModesGui= {
   \ 'i' : '#00afff',
   \ 'v' : '#5fff00',
+  \ 'V' : '#ffff00',
 \}
 function! ChangeAccentColor()
   let accentColor=get(g:colorsAndModes, mode(), g:defaultAccentColor)
