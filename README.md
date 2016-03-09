@@ -121,6 +121,14 @@ The file is **heavily** commented. You're welcome to open, read and change what 
 
 ## Changelog
 
+### 1.1
+
+- Better code organisation
+- Toggle custom key bindings easily
+- Toggle 80th column char
+- Open file browser in new tab only if tab is empty
+- Fix typos
+
 ### 1.0
 
 Initial release.
