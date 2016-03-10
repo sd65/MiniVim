@@ -3,27 +3,24 @@
 # Backup old .vimrc
 if [ -f "$HOME/.vimrc" ]; then
   echo "Backup old .vimrc to .vimrc.beforeMiniVim"
-  mv $HOME/.vimrc $HOME/.vimrc.beforeMiniVim
+  mv "$HOME/.vimrc" "$HOME/.vimrc.beforeMiniVim"
 fi
 
 # Install
-target_file="$0"
-cd $(dirname $target_file)
-target_file=$(basename $target_file)
-dir="$(dirname $target_file)"
+dir="$(cd "$(dirname "$0")" && pwd)"
 echo "Creating the .vimrc..."
-cp "${dir}/vimrc"  $HOME/.vimrc
+cp "${dir}/vimrc" "$HOME/.vimrc"
 
 # Set an option in your shell to ignore XOFF and XON signals 
 # (in order to use Ctrl S and Ctrl Q)
 echo "Ignoring XON signals...."
-echo "stty -ixon" >> $HOME/.${SHELL##*/}rc
+echo "stty -ixon" >> "$HOME/.${SHELL##*/}rc"
 
 # Ready
 echo
 echo "Installed!"
 echo "You need to reload your shell config by running:"
-echo "  source $HOME/.${SHELL##*/}rc"
+echo "  source \"$HOME/.${SHELL##*/}rc\""
 echo "Or by opening a new terminal prompt."
 echo
 echo "Then you're ready to use MiniVim!"
