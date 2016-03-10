@@ -7,7 +7,10 @@ if [ -f "$HOME/.vimrc" ]; then
 fi
 
 # Install
-dir="$(dirname $(readlink -f "$0"))"
+target_file="$0"
+cd `dirname $target_file`
+target_file=`basename $target_file`
+dir="$(dirname $target_file)"
 echo "Creating the .vimrc..."
 cp "${dir}/vimrc"  $HOME/.vimrc
 
