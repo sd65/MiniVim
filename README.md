@@ -14,7 +14,7 @@
 
 - Clone this repo to the folder of your choice:
 
-`git clone git@github.com:sd65/MiniVim.git`
+`git clone https://github.com/sd65/MiniVim.git`
 
 - Go inside this repo:
 
