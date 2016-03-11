@@ -292,12 +292,14 @@ let colorsAndModes= {
   \ 'i' : 39,
   \ 'v' : 82,
   \ 'V' : 226,
+  \ '' : 208,
 \}
 let defaultAccentColorGui='#d7005f'
 let colorsAndModesGui= {
   \ 'i' : '#00afff',
   \ 'v' : '#5fff00',
   \ 'V' : '#ffff00',
+  \ '' : '#ff8700',
 \}
 function! ChangeAccentColor()
   let accentColor=get(g:colorsAndModes, mode(), g:defaultAccentColor)
@@ -321,7 +323,7 @@ let g:currentmode={
     \ 'no' : 'N·Operator Pending',
     \ 'v'  : 'Visual',
     \ 'V'  : 'V·Line',
-    \ '^V' : 'V·Block',
+    \ '' : 'V·Block',
     \ 's'  : 'Select',
     \ 'S'  : 'S·Line',
     \ '^S' : 'S·Block',
