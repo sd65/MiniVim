@@ -1,6 +1,6 @@
 # MiniVim
 
-*Click to launch an Youtube video demo:*
+*Click to launch a YouTube video demo:*
 
 [![A screenshot](https://raw.githubusercontent.com/sd65/MiniVim/master/Screenshot.png)](https://www.youtube.com/watch?v=n0h_3e0FfYk)
 
