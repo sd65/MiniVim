@@ -121,6 +121,13 @@ The file is **heavily** commented. You're welcome to open, read and change what 
 
 ## Changelog
 
+### 1.2
+
+- Fix the visual block mode
+- Fix the incremental search
+- Install.sh is now POSIX
+- Fixed typos
+
 ### 1.1
 
 - Better code organisation
