@@ -200,7 +200,7 @@ call CreateShortcut("C-Right", "w", "nv")
 call CreateShortcut("C-Left", "b", "nv")
 
 " Ctrl F - Find
-call CreateShortcut("C-f", ":/", "in", "noTrailingIInInsert")
+call CreateShortcut("C-f", "/", "in", "noTrailingIInInsert")
 
 " Ctrl H - Search and Replace
 call CreateShortcut("C-h", ":%s/", "in", "noTrailingIInInsert")
