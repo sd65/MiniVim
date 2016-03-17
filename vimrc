@@ -185,7 +185,7 @@ call CreateShortcut("C-k", "d", "v")
 " Ctrl Q - Duplicate Line
 call CreateShortcut("C-q", "mjyyp`jjl", "i")
 call CreateShortcut("C-q", "mjyyp`jj", "n")
-call CreateShortcut("C-q", "yP", "v")
+call CreateShortcut("C-q", "y`]p", "v")
 
 " Ctrl Down - Pagedown
 call CreateShortcut("C-Down", "20j", "inv")
