@@ -109,7 +109,7 @@ Cmd | Action
 The file is **heavily** commented. You're welcome to open, read and change what you want. *It's easy.*
 
 - Work with Vim and GVim.
-- Please keep in mind that some keys **cannot** be mapped as `Ctrl Shift Something` or `Ctrl Tab` because of Terminals limitations. I have to compose with this :confused: **If you're on Windows with Putty or similar, you may experience problems because of key codes.** [http://vim.wikia.com/wiki/PuTTY_numeric_keypad_mappings](Look at this tip, it can help for PuTTY numeric keypad problems).
+- Please keep in mind that some keys **cannot** be mapped as `Ctrl Shift Something` or `Ctrl Tab` because of Terminals limitations. I have to compose with this :confused: **If you're on Windows with Putty or similar, you may experience problems because of key codes.** [Look at this tip, it can help for PuTTY numeric keypad problems](http://vim.wikia.com/wiki/PuTTY_numeric_keypad_mappings).
 - The color scheme is based on [https://github.com/sickill/vim-monokai](Monokai).
 - In the bottom right-hand corner, you have three numbers `146/472-10`. Line `146`, total lines `472` and column `10`.
 - Tabulations will be expanded into two spaces, the default indent size.
