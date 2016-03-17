@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Backup old .vimrc
-if [ -f "$HOME/.vimrc" ]; then
+if [ -f "$HOME/.vimrc" ] && ! [ -f "$HOME/.vimrc.beforeMiniVim" ]; then
   echo "Backup old .vimrc to .vimrc.beforeMiniVim"
   mv "$HOME/.vimrc" "$HOME/.vimrc.beforeMiniVim"
 fi
@@ -13,8 +13,15 @@ cp "${dir}/vimrc" "$HOME/.vimrc"
 
 # Set an option in your shell to ignore XOFF and XON signals 
 # (in order to use Ctrl S and Ctrl Q)
-echo "Ignoring XON signals...."
-echo "stty -ixon" >> "$HOME/.${SHELL##*/}rc"
+rc="$HOME/.${SHELL##*/}rc"
+if [ -f "$rc" ] && fgrep -q "stty -ixon" "$rc"; then
+  echo "Ignoring XON signals...."
+  echo "stty -ixon" >> "$HOME/.${SHELL##*/}rc"
+else
+  echo "No shell configuration file found."
+  echo "You must have yourself this line :"
+  echo "stty -ixon"
+fi
 
 # Ready
 echo
