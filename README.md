@@ -67,6 +67,7 @@ Keys | Action | Comments
 `Shift Tab` | Unindent | Like Sublime
 `Ctrl F` | Find | Like Sublime, remember as **F**Ind
 `Ctrl H` | Search and Replace | Like Sublime
+`Ctrl G` | Search and Replace on the line | Useful when duplicating a line and editing the new one
 `PageUp` | Move the line up | Usefull function so dedicated key (don't trust me ? Try it.)
 `PageDown` | Move the line down | Same as above             
 `Ctrl K` | Delete the whole line/block | Like in nano, inspired by Sublime too, remember as **K**ill the line
@@ -101,8 +102,8 @@ You can enter those command in normal mode.
 
 Cmd | Action
 | :---: | :---:
-`:W` | Write the file as root
 `:UndoCloseTab` | Reopen the last close buffer/tab in a new tab
+`:RemoveTrailingSpaces` | Remove the unwanted spaces at the end of lines
 
 ## Other info
 
@@ -111,7 +112,7 @@ The file is **heavily** commented. You're welcome to open, read and change what 
 - Work with Vim and GVim.
 - Please keep in mind that some keys **cannot** be mapped as `Ctrl Shift Something` or `Ctrl Tab` because of Terminals limitations. I have to compose with this :confused: **If you're on Windows with Putty or similar, you may experience problems because of key codes.** [Look at this tip for PuTTY numeric keypad problems](http://vim.wikia.com/wiki/PuTTY_numeric_keypad_mappings) and [this one for other mappings that doesn't work](http://unix.stackexchange.com/questions/1709/how-to-fix-ctrl-arrows-in-vim).
 - The color scheme is based on [https://github.com/sickill/vim-monokai](Monokai).
-- In the bottom right-hand corner, you have three numbers `146/472-10`. Line `146`, total lines `472` and column `10`.
+- In the bottom right-hand corner, you have numbers `115/142(90%)-10`. Line `115`, total lines `142`, position at 90% in the file and column `10`.
 - Tabulations will be expanded into two spaces, the default indent size.
 - UTF-8 by default.
 - Backups and Swapfiles are stored in `$HOME/.vim/`.
@@ -120,6 +121,16 @@ The file is **heavily** commented. You're welcome to open, read and change what 
 - When opening multiple file (as `vim file1 file2`), Vim will open those files in new tabs automatically.
 
 ## Changelog
+
+### 1.3
+
+- Custom save function
+- Complete words containing a dash
+- Replace on the line
+- Better cursor position after duplicating a block
+- Added percentage in statusline
+- Added the 'Remove Trailing Spaces' function
+- Small fixes and typos fixed
 
 ### 1.2
 
