@@ -115,11 +115,11 @@ function! MyQuit()
   endif
 endfunction
 function! MySave()
-  let cantSave = "echo 'Can\'t save the file: ' . v:exception | return"
+  let cantSave = "echo \"Can't save the file: \" . v:exception | return"
   let notSaved = "redraw | echo 'This buffer was NOT saved!' | return"
   try
     silent w
-  catch /:E45:\|:E505:/
+  catch /:E45:\|:E505:\|:E212:/
     if (confirm("This buffer is read only! Wanna save it anyway?", "&Yes\n&No", 2)==1)
       try
         silent w!
