@@ -105,6 +105,15 @@ Cmd | Action
 `:UndoCloseTab` | Reopen the last close buffer/tab in a new tab
 `:RemoveTrailingSpaces` | Remove the unwanted spaces at the end of lines
 
+## How to add plugins to MiniVim
+
+The [automated setup](#automated-setup) source in the main Vim configuration file *(.vimrc)* MiniVim.
+This means that you have a clean and standard .vimrc. 
+
+**To keep MiniVim, don't delete the `source [...]/MiniVim` instruction in the .vimrc file.**
+
+To add plugins, simply follow the plugin's instructions. You should manage them with a plugin manager as [Vundle](https://github.com/VundleVim/Vundle.vim) or the old [Pathogen](https://github.com/tpope/vim-pathogen).
+
 ## Other info
 
 The file is **heavily** commented. You're welcome to open, read and change what you want. *It's easy.*
@@ -121,6 +130,11 @@ The file is **heavily** commented. You're welcome to open, read and change what 
 - When opening multiple file (as `vim file1 file2`), Vim will open those files in new tabs automatically.
 
 ## Changelog
+
+### 1.3.1
+
+- New clean install with the [automated setup](#automated-setup)
+- Small fixes
 
 ### 1.3
 

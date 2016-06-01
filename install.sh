@@ -1,33 +1,52 @@
 #!/bin/sh
 
-# Backup old .vimrc
-if [ -f "$HOME/.vimrc" ] && ! [ -f "$HOME/.vimrc.beforeMiniVim" ]; then
+vimrc="$HOME/.vimrc"
+thisDir="$(cd "$(dirname "$0")" && pwd)"
+shellRc="$HOME/.${SHELL##*/}rc"
+s='source $HOME/.vim/MiniVim.vimrc'
+
+## Backup old .vimrc
+if [ -f "$vimrc" ] && ! [ -f "$HOME/.vimrc.beforeMiniVim" ]; then
   echo "Backup old .vimrc to .vimrc.beforeMiniVim"
-  mv "$HOME/.vimrc" "$HOME/.vimrc.beforeMiniVim"
+  mv "$vimrc" "$HOME/.vimrc.beforeMiniVim"
 fi
 
-# Install
-dir="$(cd "$(dirname "$0")" && pwd)"
-echo "Creating the .vimrc..."
-cp "${dir}/vimrc" "$HOME/.vimrc"
+## Install
+# Create the destination dir
+echo "Creating the .vim dir..."
+mkdir -p "$HOME/.vim"
+# Copying the MiniVim file
+echo "Copying the MiniVim config..."
+cp "${thisDir}/vimrc" "$HOME/.vim/MiniVim.vimrc"
+# Sourcing in the main vimrc
+touch "$vimrc"
+if fgrep -q "$s" "$vimrc"; then
+  echo "Great, your already installed MiniVim."
+else
+  echo "Configuring the .vimrc..."
+  echo "$s" >> "$vimrc"
+fi
 
-# Set an option in your shell to ignore XOFF and XON signals 
-# (in order to use Ctrl S and Ctrl Q)
-rc="$HOME/.${SHELL##*/}rc"
-if [ -f "$rc" ] && fgrep -q "stty -ixon" "$rc"; then
-  echo "Ignoring XON signals...."
-  echo "stty -ixon" >> "$HOME/.${SHELL##*/}rc"
+## Set an option in your shell to ignore XOFF and XON signals
+## (in order to use Ctrl S and Ctrl Q)
+if [ -f "$shellRc" ]; then
+  if fgrep -q "stty -ixon" "$shellRc"; then
+    echo "Great, your shell is already ignoring XON signals."
+  else
+    echo "Ignoring XON signals...."
+    echo "stty -ixon" >> "$shellRc"
+    echo "> You need to reload your shell config by running :"
+    echo "  source $shellRc"
+    echo "Or by opening a new terminal prompt."
+  fi
 else
   echo "No shell configuration file found."
-  echo "You must have yourself this line :"
+  echo "Add this line to your shell config (.bashrc, .zshrc, etc) :"
   echo "stty -ixon"
+  echo "Then open a new terminal prompt"
 fi
 
-# Ready
+## Ready
 echo
-echo "Installed!"
-echo "You need to reload your shell config by running:"
-echo "  source \"$HOME/.${SHELL##*/}rc\""
-echo "Or by opening a new terminal prompt."
-echo
-echo "Then you're ready to use MiniVim!"
+echo "> Installed !"
+echo "Just open vim now."
