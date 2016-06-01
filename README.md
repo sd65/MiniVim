@@ -4,6 +4,8 @@
 
 [![A screenshot](https://raw.githubusercontent.com/sd65/MiniVim/master/Screenshot.png)](https://www.youtube.com/watch?v=n0h_3e0FfYk)
 
+A longer and more up to date demo is available here : [Demo](https://youtu.be/3kX7GdCIjrk)
+
 ## Goals
 
 - No bullshit default key mappings
