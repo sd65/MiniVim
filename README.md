@@ -126,6 +126,13 @@ There are 2 solutions :
 - `sudo -E vim [file]` as `-E ` preserve your existing environment variables (as $HOME here and therefore your ~/.vimrc).
 - `sudoedit [file]` or `sudo -e [file]` (synonyms). To use this, you must have set your `$EDITOR` environment variable. Then, this command will make a copy of the designated file and you will edit the copy. Note that the original file will only be modified when you exit your editor ! 
 
+## How to update MiniVim ?
+
+First, you have to fetch the latest MiniVim. If you had cloned the repo, simply `git pull`. Else, re-download the lastest version on GitHub.
+
+If you setup MiniVim automatically, simply re-run the installer. It will take care of everything.
+
+If not, copy again the vimrc file to `~/.vimrc`
 
 ## Other info
 
