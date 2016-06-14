@@ -116,6 +116,17 @@ This means that you have a clean and standard .vimrc.
 
 To add plugins, simply follow the plugin's instructions. You should manage them with a plugin manager as [Vundle](https://github.com/VundleVim/Vundle.vim) or the old [Pathogen](https://github.com/tpope/vim-pathogen).
 
+## How to use MiniVim with *sudo*
+
+First, you could install MiniVim as root. Or better soft link your .vimrc.
+But it's sometimes not the best solution, like in a company where the root user is shared.
+
+So, you can configure your system to use MiniVim when you `sudo vim [file]`.
+There are 2 solutions :
+- `sudo -E vim [file]` as `-E ` preserve your existing environment variables (as $HOME here and therefore your ~/.vimrc).
+- `sudoedit [file]` or `sudo -e [file]` (synonyms). To use this, you must have set your `$EDITOR` environment variable. Then, this command will make a copy of the designated file and you will edit the copy. Note that the original file will only be modified when you exit your editor ! 
+
+
 ## Other info
 
 The file is **heavily** commented. You're welcome to open, read and change what you want. *It's easy.*
