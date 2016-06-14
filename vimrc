@@ -1,6 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MiniVim
 " Details on : https://github.com/sd65/MiniVim
+let g:UseCustomKeyBindings = get(g:, 'UseCustomKeyBindings', "1")
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """ General options
@@ -53,6 +54,20 @@ function! GetFileInfo()
   let permissions = getfperm(expand('%:p'))
   echon  &filetype . ", " . GetFileSize() . ", " . permissions
 endfunction
+function! GetFileSize()
+  let bytes = getfsize(expand('%:p'))
+  if bytes <= 0
+     return ""
+  elseif bytes > 1024*1000*1000
+    return (bytes / 1024*1000*1000) . "GB"
+  elseif bytes > 1024*1000
+    return (bytes / 1024*1000) . "MB"
+  elseif bytes > 1024
+    return (bytes / 1024) . "KB"
+  else
+     return bytes . "B"
+  endif
+endfunction
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif | call GetFileInfo()
 
 """ Custom backup and swap files
@@ -75,7 +90,7 @@ let &backupdir = myBackupDir
 set writebackup
 
 """ Key mappings
-if UseCustomKeyBindings
+if g:UseCustomKeyBindings
 
 " Helper functions
 function! CreateShortcut(keys, cmd, where, ...)
@@ -155,20 +170,6 @@ function! MySave()
   echohl iGreen | echon "    SAVED     "
   echohl Green | echon  " " . GetFileSize() . ", " . time . ", " . permissions
   echohl None
-endfunction
-function! GetFileSize()
-  let bytes = getfsize(expand('%:p'))
-  if bytes <= 0
-     return ""
-  elseif bytes > 1024*1000*1000
-    return (bytes / 1024*1000*1000) . "GB"
-  elseif bytes > 1024*1000
-    return (bytes / 1024*1000) . "MB"
-  elseif bytes > 1024
-    return (bytes / 1024) . "KB"
-  else
-     return bytes . "B"
-  endif
 endfunction
 function! OpenLastBufferInNewTab()
     redir => ls_output

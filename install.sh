@@ -27,8 +27,8 @@ else
 	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 	" MiniVim
 	" Details on : https://github.com/sd65/MiniVim
-	let MiniVimVersion = "1.3.2"
-	let UseCustomKeyBindings = 1
+	let g:MiniVimVersion = "1.3.2"
+	let g:UseCustomKeyBindings = 1
 	source $HOME/.vim/MiniVim.vimrc
 	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 	EOF
