@@ -36,7 +36,7 @@ If you can't clone the repo and do the above steps, just download the .vimrc to 
 
 `wget https://raw.githubusercontent.com/sd65/MiniVim/master/vimrc -O ~/.vimrc`
 
-And then add `stty -ixon` to your .zshrc or .bashrc (your shell will ignore XON/XOFF signals. Needed to remap Ctrl S, Ctrl Q).
+And then add `stty -ixon` to your .zshrc or .bashrc (your shell will ignore XON/XOFF signals. Needed to remap Ctrl S, Ctrl Q). It will prevent the terminal from "freezing" when saving a file or duplicating a line.
 
 ## How to use
 
