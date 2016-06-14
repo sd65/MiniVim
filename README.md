@@ -144,6 +144,11 @@ The file is **heavily** commented. You're welcome to open, read and change what 
 
 ## Changelog
 
+### 1.3.2
+
+- Configuration is kept in .vimrc to persist between updates
+- Better README
+
 ### 1.3.1
 
 - New clean install with the [automated setup](#automated-setup)

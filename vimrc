@@ -1,7 +1,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MiniVim
 " Details on : https://github.com/sd65/MiniVim
-let MiniVimVersion = "1.3.1"
-let UseCustomKeyBindings = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """ General options

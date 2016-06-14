@@ -3,7 +3,6 @@
 vimrc="$HOME/.vimrc"
 thisDir="$(cd "$(dirname "$0")" && pwd)"
 shellRc="$HOME/.${SHELL##*/}rc"
-s='source $HOME/.vim/MiniVim.vimrc'
 
 ## Backup old .vimrc
 if [ -f "$vimrc" ] && ! [ -f "$HOME/.vimrc.beforeMiniVim" ]; then
@@ -20,11 +19,19 @@ echo "Copying the MiniVim config..."
 cp "${thisDir}/vimrc" "$HOME/.vim/MiniVim.vimrc"
 # Sourcing in the main vimrc
 touch "$vimrc"
-if fgrep -q "$s" "$vimrc"; then
+if grep -q 'source $HOME/.vim/MiniVim.vimrc' "$vimrc"; then
   echo "Great, your already installed MiniVim."
 else
   echo "Configuring the .vimrc..."
-  echo "$s" >> "$vimrc"
+  cat <<- 'EOF' >> "$vimrc"
+	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	" MiniVim
+	" Details on : https://github.com/sd65/MiniVim
+	let MiniVimVersion = "1.3.2"
+	let UseCustomKeyBindings = 1
+	source $HOME/.vim/MiniVim.vimrc
+	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	EOF
 fi
 
 ## Set an option in your shell to ignore XOFF and XON signals
