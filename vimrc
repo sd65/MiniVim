@@ -323,7 +323,7 @@ call CreateShortcut("f6",":call ToggleColorColumn()<CR>", "inv")
 call CreateShortcut("C-o",":call OpenNetrw()<CR>", "inv", "noTrailingIInInsert", "cmdInVisual")
 let g:netrw_banner=0 " Hide banner
 let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+' " Hide hidden files
-autocmd filetype netrw call KeysInNetrw()
+autocmd FileType netrw call KeysInNetrw()
 function! KeysInNetrw()
   " Right to enter
   nmap <buffer> <Right> <CR>
