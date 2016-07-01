@@ -5,7 +5,6 @@ let g:UseCustomKeyBindings = get(g:, 'UseCustomKeyBindings', "1")
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """ General options
-start " Start in Insert mode
 syntax enable " Enable syntax highlights
 set ttyfast " Faster refraw
 set mouse=nv " Mouse activated in Normal and Visual Mode
@@ -88,6 +87,22 @@ set backupext=.bak
 let &directory = mySwapDir
 let &backupdir = myBackupDir
 set writebackup
+
+""" Smart Paste
+let &t_ti .= "\<Esc>[?2004h"
+let &t_te .= "\<Esc>[?2004l"
+function! XTermPasteBegin(ret)
+  set pastetoggle=<f29>
+  set paste
+  return a:ret
+endfunction
+execute "set <f28>=\<Esc>[200~"
+execute "set <f29>=\<Esc>[201~"
+map <expr> <f28> XTermPasteBegin("i")
+imap <expr> <f28> XTermPasteBegin("")
+vmap <expr> <f28> XTermPasteBegin("c")
+cmap <f28> <nop>
+cmap <f29> <nop>
 
 """ Key mappings
 if g:UseCustomKeyBindings
@@ -519,3 +534,5 @@ hi cssValueLength ctermfg=141 ctermbg=NONE cterm=NONE guifg=#ae81ff guibg=NONE g
 hi cssCommonAttr ctermfg=81 ctermbg=NONE cterm=NONE guifg=#66d9ef guibg=NONE gui=NONE
 hi cssBraces ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 hi TabLineFill cterm=bold ctermbg=0
+" Final redraw
+call ChangeAccentColor()

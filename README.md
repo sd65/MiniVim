@@ -41,7 +41,6 @@ And then add `stty -ixon` to your .zshrc or .bashrc (your shell will ignore XON/
 ## How to use
 
 - **The key mappings can be used in Insert, Normal and Visual mode (yes, no need to exit Insert or Visual mode)**
-- Vim launched by default in Insert mode (yes, I mainly want to edit the file I'm opening)
 - The mouse can be used in Normal and Visual mode to scroll, select, change tab and more.
 - There are clear visual hints on which mode you currently using. Like pink=normal, blue=insert and green=visual...
 
@@ -141,6 +140,7 @@ The file is **heavily** commented. You're welcome to open, read and change what 
 - Work with Vim and GVim.
 - Please keep in mind that some keys **cannot** be mapped as `Ctrl Shift Something` or `Ctrl Tab` because of Terminals limitations. I have to compose with this :confused: **If you're on Windows with Putty or similar, you may experience problems because of key codes.** [Look at this tip for PuTTY numeric keypad problems](http://vim.wikia.com/wiki/PuTTY_numeric_keypad_mappings) and [this one for other mappings that doesn't work](http://unix.stackexchange.com/questions/1709/how-to-fix-ctrl-arrows-in-vim).
 - The color scheme is based on [https://github.com/sickill/vim-monokai](Monokai).
+- Smart Paste system is based on [https://github.com/ConradIrwin/vim-bracketed-paste](ConradIrwin/vim-bracketed-paste).
 - In the bottom right-hand corner, you have numbers `115/142(90%)-10`. Line `115`, total lines `142`, position at 90% in the file and column `10`.
 - Tabulations will be expanded into two spaces, the default indent size.
 - UTF-8 by default.
@@ -150,6 +150,11 @@ The file is **heavily** commented. You're welcome to open, read and change what 
 - When opening multiple file (as `vim file1 file2`), Vim will open those files in new tabs automatically.
 
 ## Changelog
+
+### 1.3.3
+
+- Smart paste
+- The default mode is "Normal"
 
 ### 1.3.2
 
