@@ -230,6 +230,53 @@ function! MenuNetrw()
   endif
 endfunction
 
+" Commenting blocks of code.
+autocmd FileType c,cpp,java         let b:comment_leader = '\/\/'
+autocmd FileType javascript         let b:comment_leader = '\/\/'
+autocmd FileType arduino            let b:comment_leader = '\/\/'
+autocmd FileType registry           let b:comment_leader = ';'
+autocmd FileType dosbatch           let b:comment_leader = '::'
+autocmd FileType sh,ruby,python     let b:comment_leader = '#'
+autocmd FileType conf,fstab,zsh     let b:comment_leader = '#'
+autocmd FileType make,Cmake,yaml    let b:comment_leader = '#'
+autocmd FileType desktop            let b:comment_leader = '#'
+autocmd FileType matlab,tex         let b:comment_leader = '%'
+autocmd FileType vim                let b:comment_leader = '"'
+autocmd FileType css                let b:comment_leader = '\/\*'   |   let b:comment_ender = '\*\/'
+autocmd FileType html,xml,markdown  let b:comment_leader = '<!--'   |   let b:comment_ender = '-->'
+
+function! ToggleComments(n)
+  if a:n =~ "."
+    let l:lineBegin = line(".")
+    let l:lineEnd = line(".")
+  else
+    let l:lineBegin = line("'<")
+    let l:lineEnd = line("'>")
+  endif
+
+  for i in range(l:lineBegin, l:lineEnd)
+    if exists('b:comment_leader')
+      if getline(i) =~ '^' .b:comment_leader
+        " uncomment the line
+        execute 'silent '.i.'s/^' .b:comment_leader.' //g'
+        if exists('b:comment_ender')
+          execute 'silent '.i.'s/ ' .b:comment_ender.'$//g'
+        endif
+      elseif getline(i) =~ '^\s*$'
+        " empty lines, ignore
+      else
+        " comment the line
+        execute 'silent '.i.'s/^/' .b:comment_leader.' /g'
+        if exists('b:comment_ender')
+          execute 'silent '.i.'s/$/\ ' .b:comment_ender.'/g'
+        endif
+      endif
+    else
+      echo 'No comment leader found for filetype'
+    endif
+  endfor
+endfunction
+
 " Usefull shortcuts to enter insert mode
 nnoremap <CR> i<CR>
 nnoremap <Backspace> i<Backspace>
@@ -336,6 +383,11 @@ call CreateShortcut("f6",":call ToggleColorColumn()<CR>", "inv")
 
 " Ctrl O - Netrw (:Explore)
 call CreateShortcut("C-o",":call OpenNetrw()<CR>", "inv", "noTrailingIInInsert", "cmdInVisual")
+
+" Ctrl \ - Toggle comments
+call CreateShortcut("C-\\", ":call ToggleComments('.')<CR>", "in")
+vnoremap <silent> <C-\> <ESC>:call ToggleComments("")<CR>
+
 let g:netrw_banner=0 " Hide banner
 let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+' " Hide hidden files
 autocmd FileType netrw call KeysInNetrw()
