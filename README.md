@@ -75,6 +75,7 @@ Keys | Action | Comments
 `Ctrl L` | Clear/Delete all lines | Like in a shell, remember as C**l**ear
 `Ctrl D` | Delete char from the left, as `Del` | Like in a shell, remember as **D**elete
 `Ctrl N` | Autocomplete word | Default VIM mapping but interesting one 
+`Ctrl \` | Comment/Uncomment | Depends on filetype
 | **Vital** | **----------** | **----------**
 `Ctrl S` | Save | Like Sublime, remember as **S**ave
 `Ctrl C` | Quit | Like in a shell

@@ -105,6 +105,21 @@ vmap <expr> <f28> XTermPasteBegin("c")
 cmap <f28> <nop>
 cmap <f29> <nop>
 
+"""  Block Commenter Helper
+autocmd FileType c,cpp,java,go      let b:comment_leader = '\/\/'
+autocmd FileType javascript         let b:comment_leader = '\/\/'
+autocmd FileType arduino            let b:comment_leader = '\/\/'
+autocmd FileType registry           let b:comment_leader = ';'
+autocmd FileType dosbatch           let b:comment_leader = '::'
+autocmd FileType sh,ruby,python     let b:comment_leader = '#'
+autocmd FileType conf,fstab,zsh     let b:comment_leader = '#'
+autocmd FileType make,Cmake,yaml    let b:comment_leader = '#'
+autocmd FileType desktop            let b:comment_leader = '#'
+autocmd FileType matlab,tex         let b:comment_leader = '%'
+autocmd FileType vim                let b:comment_leader = '"'
+autocmd FileType css                let b:comment_leader = '\/\*' | let b:comment_ender = '\*\/'
+autocmd FileType html,xml,markdown  let b:comment_leader = '<!--' | let b:comment_ender = '-->'
+
 """ Key mappings
 if g:UseCustomKeyBindings
 
@@ -230,6 +245,27 @@ function! MenuNetrw()
     normal D
   endif
 endfunction
+function! ToggleComment()
+  if exists('b:comment_leader')
+    if getline(".") =~ '^' . b:comment_leader
+      " Uncomment the line
+      execute 'silent s/^' . b:comment_leader .'\( \)\?//g'
+      if exists('b:comment_ender')
+        execute 'silent s/ ' . b:comment_ender .'$//g'
+      endif
+    elseif getline(".") =~ '^\s*$'
+      " Empty lines: ignore
+    else
+      " Comment the line
+      execute 'silent s/^/' . b:comment_leader .' /g'
+      if exists('b:comment_ender')
+        execute 'silent s/$/\ ' . b:comment_ender .'/g'
+      endif
+    endif
+  else
+    echom "Unknow comment's symbols for filetype"
+  endif
+endfunction
 
 " Usefull shortcuts to enter insert mode
 nnoremap <CR> i<CR>
@@ -343,6 +379,10 @@ call CreateShortcut("f6",":call ToggleColorColumn()<CR>", "inv")
 
 " Ctrl O - Netrw (:Explore)
 call CreateShortcut("C-o",":call OpenNetrw()<CR>", "inv", "noTrailingIInInsert", "cmdInVisual")
+
+" Ctrl \ - Toggle comments
+call CreateShortcut("C-\\", ":call ToggleComment()<CR>", "inv")
+
 let g:netrw_banner=0 " Hide banner
 let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+' " Hide hidden files
 autocmd FileType netrw call KeysInNetrw()
@@ -426,8 +466,10 @@ set statusline+=%{ChangeAccentColor()}
 set statusline+=%1*\ ***%{toupper(g:currentmode[mode()])}***\  " Current mode
 set statusline+=%2*\ %<%F\  " Filepath
 set statusline+=%2*\ %= " To the right
+set statusline+=%2*\ (%{&filetype}) " Filetype
 set statusline+=%2*\ %{toupper((&fenc!=''?&fenc:&enc))}\[%{&ff}] " Encoding & Fileformat
-set statusline+=%2*\ %{Modified()}\ %{ReadOnly()} " Flags
+set statusline+=%2*\ %{Modified()} " Modified Flags
+set statusline+=%2*\ %{ReadOnly()} " ReadOnly Flags
 set statusline+=%1*\ \%l/%L(%P)-%c\  " Position
 " Speed up the redraw
 au InsertLeave * call ChangeAccentColor()
