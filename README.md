@@ -8,7 +8,6 @@ A longer and more up to date demo is available here : [Demo](https://youtu.be/3k
 
 ## Goals
 
-- No bullshit default key mappings
 - Mimic Sublime Text / Shell key mappings
 - Minimal: one file, **no plugin needed!**
 
