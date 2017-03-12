@@ -292,6 +292,13 @@ call CreateShortcut("PageUp", ":m-2<CR>", "inv", "restoreSelectionAfter")
 call CreateShortcut("PageDown", ":m+<CR>", "in")
 call CreateShortcut("PageDown", ":m'>+<CR>", "v", "restoreSelectionAfter")
 
+" Ctrl Pageup - Move up Line booster
+call CreateShortcut("C-PageUp", ":m-16<CR>", "inv", "restoreSelectionAfter")
+
+" Ctrl Pagedown - Move down Line boosted
+call CreateShortcut("C-PageDown", ":m+15<CR>", "in")
+call CreateShortcut("C-PageDown", ":m'>+15<CR>", "v", "restoreSelectionAfter")
+
 " Ctrl C - Quit
 call CreateShortcut("C-c", ":call MyQuit()<CR>", "inv", "cmdInVisual")
 

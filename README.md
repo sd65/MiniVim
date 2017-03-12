@@ -68,7 +68,7 @@ Keys | Action | Comments
 `Ctrl F` | Find | Like Sublime, remember as **F**Ind
 `Ctrl H` | Search and Replace | Like Sublime
 `Ctrl G` | Search and Replace on the line | Useful when duplicating a line and editing the new one
-`PageUp` | Move the line up | Usefull function so dedicated key (don't trust me ? Try it.)
+`PageUp` | Move the line up | Usefull function so dedicated key (don't trust me ? Try it.) Ctrl is a booster too!
 `PageDown` | Move the line down | Same as above             
 `Ctrl K` | Delete the whole line/block | Like in nano, inspired by Sublime too, remember as **K**ill the line
 `Ctrl Q` | Duplicate the line/block | Remember as "dupli**q**ate"?
