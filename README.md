@@ -151,6 +151,12 @@ The file is **heavily** commented. You're welcome to open, read and change what 
 
 ## Changelog
 
+### 1.4
+
+- Comment & Uncomment feature
+- Improve block move Up/Down
+- Minor bug fixes
+
 ### 1.3.3
 
 - Smart paste
