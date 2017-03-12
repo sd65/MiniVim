@@ -286,12 +286,11 @@ call CreateShortcut("C-g", ":s/", "in", "noTrailingIInInsert")
 call CreateShortcut("C-l", "ggdG", "in")
 
 " Pageup - Move up Line
-call CreateShortcut("PageUp", ":m-2<CR>", "in")
-call CreateShortcut("PageUp", "dkP", "v")
+call CreateShortcut("PageUp", ":m-2<CR>", "inv", "restoreSelectionAfter")
 
 " Pagedown - Move down Line
 call CreateShortcut("PageDown", ":m+<CR>", "in")
-call CreateShortcut("PageDown", "dp", "v")
+call CreateShortcut("PageDown", ":m'>+<CR>", "v", "restoreSelectionAfter")
 
 " Ctrl C - Quit
 call CreateShortcut("C-c", ":call MyQuit()<CR>", "inv", "cmdInVisual")
