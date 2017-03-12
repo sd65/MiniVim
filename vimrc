@@ -40,6 +40,8 @@ set fileencoding=utf-8  " The encoding written to file.
 set synmaxcol=300 " Don't try to highlight long lines
 set guioptions-=T " Don't show toolbar in Gvim
 set iskeyword+=\- " Complete words containing a dash
+let g:netrw_list_hide='' " Show all hidden files when usding vim explorer
+let g:netrw_hide=0 " Show all hidden files when usding vim explorer
 " Open all cmd args in new tabs
 execute ":silent tab all"
 
