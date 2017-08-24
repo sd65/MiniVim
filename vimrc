@@ -434,6 +434,20 @@ function! ChangeAccentColor()
   execute 'hi CursorLineNr ctermfg=' . accentColor . ' guifg=' . accentColorGui
   return ''
 endfunction
+function! SearchCount()
+  let keyString=@/
+  let pos=getpos('.')
+  try
+    redir => nth
+      silent exe '0,.s/' . keyString . '//ne'
+    redir => cnt
+      silent exe '%s/' . keyString . '//ne'
+    redir END
+    return matchstr( nth, '\d\+' ) . '/' . matchstr( cnt, '\d\+' )
+  finally
+    call setpos('.', pos)
+  endtry
+endfunction
 function! ReadOnly()
   return (&readonly || !&modifiable) ? 'Read Only ' : ''
 endfunction
@@ -465,6 +479,7 @@ set statusline=
 set statusline+=%{ChangeAccentColor()}
 set statusline+=%1*\ ***%{toupper(g:currentmode[mode()])}***\  " Current mode
 set statusline+=%2*\ %<%F\  " Filepath
+set statusline+=%2*\ [%{SearchCount()}] " Nth of N when searching
 set statusline+=%2*\ %= " To the right
 set statusline+=%2*\ (%{&filetype}) " Filetype
 set statusline+=%2*\ %{toupper((&fenc!=''?&fenc:&enc))}\[%{&ff}] " Encoding & Fileformat
