@@ -151,6 +151,11 @@ The file is **heavily** commented. You're welcome to open, read and change what 
 
 ## Changelog
 
+### 1.5
+
+- Change the terminal title to the current edited file
+- Faster color mode changes
+
 ### 1.4
 
 - Comment & Uncomment feature
