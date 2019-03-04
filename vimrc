@@ -40,6 +40,8 @@ set fileencoding=utf-8  " The encoding written to file.
 set synmaxcol=300 " Don't try to highlight long lines
 set guioptions-=T " Don't show toolbar in Gvim
 set iskeyword+=\- " Complete words containing a dash
+set title
+set titleold="Terminal"
 " Open all cmd args in new tabs
 execute ":silent tab all"
 
