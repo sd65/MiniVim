@@ -434,7 +434,6 @@ function! ChangeAccentColor()
   execute 'hi TabLineSel ctermfg=0 cterm=bold ctermbg=' . accentColor
   execute 'hi TabLine ctermbg=0 ctermfg=' . accentColor
   execute 'hi CursorLineNr ctermfg=' . accentColor . ' guifg=' . accentColorGui
-  redraw
   return ''
 endfunction
 function! ReadOnly()
